@@ -1,0 +1,12 @@
+name = "Hope PH 2023"
+license = "MIT"
+licenselink = ""
+description = ""
+homepage = "https://www.hopeph.com"
+tags = ["philippines", "portal", "homepage"]
+features = ["date", "calendar", "weather", "directory"]
+min_version = "0.41.0"
+
+[author]
+    name = "Hope PH"
+    homepage = "https://www.hopeph.com"

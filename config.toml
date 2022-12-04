@@ -1,0 +1,4 @@
+baseURL = 'https://www.hopeph.com'
+languageCode = 'en-us'
+title = 'Hope PH'
+theme = 'hopeph_2023'
