@@ -3,10 +3,147 @@
 
 <!-- Content goes here -->
 <div id="content">
-<p class="quote">
-    The main hope of a nation <span class="emoji">🇵🇭</span> lies in the proper <span class="emoji">📖</span> education  of its <span class="emoji">🧒</span> youth.
-</p>
+<div class="splw-lite-wrapper">
+    <div class="splw-lite-header">
+        <div class="splw-lite-header-title-wrapper">
+            <div class="splw-lite-header-title">Manila, Philippines</div>
+            <div class="splw-lite-current-time"><img draggable="false" role="img" class="emoji" alt="⏰" src="https://s.w.org/images/core/emoji/14.0.0/svg/23f0.svg"> ika-7 ng gabi, Agosto 10, 2023 – Huwebes</div>
+        </div>
+    </div>
+    <div class="splw-lite-body">
+        <div class="splw-lite-current-temp">
+            <div class="splw-cur-temp"><img decoding="async" src="https://openweathermap.org/img/w/10n.png" class="weather-icon"> <span class="cur-temp"> 30°C</span></div>
+        </div>
+        <div class="splw-lite-current-text">
+            <div class="splw-lite-desc"><span>light rain</span></div>
+            <div class="splw-other-opt">
+                <div class="splw-gusts-wind">Wind: 22 Km/h</div>
+                <div class="splw-sunrise">Sunrise: 5:41 am</div>
+                <div class="splw-sunset">Sunset: 6:22 pm</div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<p>
+<script type="text/javascript">
+(function($) {
+
+    let hourRegex = /ika-((?:\.?\d*))/;
+    var hour = $("div.splw-lite-current-time").text().match(hourRegex);
+    var theHour = Number(hour[1]);
+
+      if (theHour >= 13 && theHour <= 17) {
+        $("div.splw-lite-current-time").text(
+          $("div.splw-lite-current-time")
+            .text()
+            .replace(/umaga|hapon/g, "hapon")
+        );
+      } else if (theHour >= 18 && theHour <= 23) {
+        $("div.splw-lite-current-time").text(
+          $("div.splw-lite-current-time")
+            .text()
+            .replace(/umaga|hapon/g, "gabi")
+        );
+      } else if (theHour >= 1 && theHour <= 5) {
+        $("div.splw-lite-current-time").html(
+          $("div.splw-lite-current-time")
+            .html()
+            .replace(/umaga|hapon/g, "madaling-araw")
+        );
+      } else if (theHour == 12) {
+        $("div.splw-lite-current-time").text(
+          $("div.splw-lite-current-time")
+            .text()
+            .replace(/umaga|hapon/g, "tanghali")
+        );
+      }
+
+      if (theHour > 12) {
+        $("div.splw-lite-current-time").text(
+          $("div.splw-lite-current-time")
+            .text()
+            .replace(String(theHour), String(theHour - 12))
+        );
+      } else if (theHour == 0) {
+        $("div.splw-lite-current-time").text(
+          $("div.splw-lite-current-time").text().replace(String(theHour), "12")
+        );
+        $("div.splw-lite-current-time").text(
+          $("div.splw-lite-current-time")
+            .text()
+            .replace(/umaga|hapon/g, "hating-gabi")
+        );
+      }
+
+      let dayRegex = /ika-\d{1,2}\sng\s(?:[a-z\-])+,\s(?:[a-z]+)\s\d{1,2},\s\d{4}(\s-\s([a-z]+))/i;
+      var dayMatch = $("div.splw-lite-current-time").text().match(dayRegex);
+      // console.log(dayMatch);
+      var daySearch = dayMatch[1];
+      var day = dayMatch[2];
+      $("#element").text(String(day));
+      $("div.splw-lite-current-time").html(
+        $("div.splw-lite-current-time")
+          .html()
+          .replace(daySearch, "<br><span id=\"day-title\">araw ng " + day + "</span><br><br><span id=\"weather-location-title\">Manila, Philippines</span>")
+      );
+
+      let ikaRegex = /(ika-\d{1,2}\s.+\s2022)/i;
+      var ikaMatch = $("div.splw-lite-current-time").text().match(ikaRegex);
+      console.log(ikaMatch);
+      var ikaSearch = ikaMatch[1];
+      $("#element").text(String(day));
+      $("div.splw-lite-current-time").html(
+        $("div.splw-lite-current-time")
+          .html()
+          .replace(ikaSearch, "<span id=\"datetime-title\">" + ikaSearch + "</span>")
+      );
+
+    const element = $(".splw-lite-desc > span:nth-child(1)");
+    const description = element.text();
+
+    switch(description) {
+      case 'broken clouds':
+        var translatedText = 'basag na mga ulap';
+        break;
+      case 'overcast clouds':
+        var translatedText = 'makulimlim na ulap';
+        break;
+      case 'shower rain':
+        var translatedText = 'kalat-kalat na pag-ulan';
+        break;
+      default:
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=tl&dt=t&q=" + description, false);
+        xhttp.send();
+        var response = JSON.parse(xhttp.responseText);
+        var translatedText = response[0][0][0];
+    }
+
+    console.log(translatedText);
+    console.log(description);
+
+    if (translatedText == description) {
+        element.html(description);
+    } else {
+        element.html(translatedText + "<br>(" + description + ")");
+    }
+
+    $("div.splw-gusts-wind").text($("div.splw-gusts-wind").text().replace("Wind", "🌬️ Bugso ng Hangin"));
+    $("div.splw-sunrise").text($("div.splw-sunrise").text().replace("Sunrise", "🌄 Bukang Liwayway"));
+    $("div.splw-sunset").text($("div.splw-sunset").text().replace("Sunset", "🌇 Takipsilim"));
+    
+})(jQuery);
+</script>
+</p>
+
+<a href="https://code.hopeph.com/"><img src="images/code.png" alt="</code>" title="computers and Internet" width="400"></a>
+<a href="https://ink.hopeph.com/"><img src="images/ink.png" alt="ink" title="books and writers" width="400"></a>
+<a href="https://space.hopeph.com/"><img src="images/space.png" alt="*space*" title="photography" width="400"></a>
+<br>
+<a href="https://directory.hopeph.com/"><img src="images/directory.png" alt="directory" title="online Filipino destinations" width="400"></a>
+</div>
+
 
 <!-- Include the site info and footer -->
 {{ partial "footer.html" . }}
