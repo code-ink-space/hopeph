@@ -1,3 +1,8 @@
+@font-face {
+  font-family: Schoolbell;
+  src: url("/fonts/Schoolbell-Regular.ttf");
+}
+
 header, #content, footer {
     text-align: center;
 }
@@ -35,6 +40,7 @@ div.splw-lite-header-title {
 }
 .splw-lite-wrapper {
     padding-top: 0 !important;
+    font-family: Schoolbell, sans-serif !important;
 }
 img.wp-smiley, img.emoji {
     display: inline !important;
