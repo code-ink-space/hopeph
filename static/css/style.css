@@ -7,6 +7,12 @@ header, #content, footer {
     text-align: center;
 }
 
+.responsive-headerimg {
+    width: 95%;
+    max-width: 850px;
+    height: auto;
+}
+
 .quote {
     font-style: italic;
 }
