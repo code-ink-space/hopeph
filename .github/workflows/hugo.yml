@@ -24,6 +24,9 @@ concurrency:
 defaults:
   run:
     shell: bash
+    
+env:
+  BASE_URL: https://code-ink-space.github.io/hopeph/
 
 jobs:
   # Build job
@@ -51,7 +54,7 @@ jobs:
         run: |
           hugo \
             --minify \
-            --baseURL "https://code-ink-space.github.io/hopeph/"
+            --baseURL "$BASE_URL"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
@@ -61,7 +64,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: $BASE_URL
     runs-on: ubuntu-latest
     needs: build
     steps:
