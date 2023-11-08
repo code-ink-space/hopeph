@@ -71,7 +71,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ BASE_URL }}
+      url: ${ BASE_URL }
     runs-on: ubuntu-latest
     needs: build
     steps:
