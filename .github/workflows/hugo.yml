@@ -71,7 +71,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${ BASE_URL }
+      url: https://code-ink-space.github.io/hopeph/
     runs-on: ubuntu-latest
     needs: build
     steps:
